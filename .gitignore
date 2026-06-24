@@ -76,6 +76,11 @@ web/version.json
 .env.*
 !.env.example
 
+# Local app configuration with secrets
+appsettings.json
+appsettings.*.json
+!appsettings.example.json
+
 # =========================
 # Logs
 # =========================
