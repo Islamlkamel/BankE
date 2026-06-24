@@ -1,0 +1,63 @@
+# Flutter-related
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+
+# Android-related
+**/android/local.properties
+**/android/**/GeneratedPluginRegistrant.java
+**/android/.gradle
+**/android/app/debug
+**/android/app/profile
+**/android/app/release
+
+# iOS-related
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/Flutter/App.framework
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/App.podspec
+**/ios/.generated/
+**/ios/Pods/
+**/ios/.symlinks/
+**/ios/Flutter/Config.xcconfig
+**/ios/ServiceDefinitions.json
+**/ios/Runner/GeneratedPluginRegistrant.h
+**/ios/Runner/GeneratedPluginRegistrant.m
+
+# macOS-related
+**/macos/Flutter/ephemeral/
+**/macos/Flutter/GeneratedPluginRegistrant.swift
+**/macos/Pods/
+
+# Linux-related
+**/linux/flutter/ephemeral/
+
+# Windows-related
+**/windows/flutter/ephemeral/
+
+# Web-related
+lib/generated_plugin_registrant.dart
+
+# IDE-related
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.history
+
+# Debug/Logs
+*.log
+*.lock (except pubspec.lock)
+.DS_Store
+
+# User-specific
+/android/key.properties
+*.keystore
+*.jks

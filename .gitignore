@@ -1,0 +1,92 @@
+# =========================
+# .NET
+# =========================
+
+bin/
+obj/
+
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+.vs/
+
+TestResults/
+
+*.dbmdl
+*.cache
+*.pdb
+*.mdb
+
+# Rider
+.idea/
+
+# VS Code
+.vscode/
+
+# =========================
+# Flutter / Dart
+# =========================
+
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+
+build/
+
+# Generated files
+.flutter-versions
+.flutter-plugins
+generated_plugin_registrant.dart
+
+# Android
+android/.gradle/
+android/app/debug
+android/app/profile
+android/app/release
+
+# iOS
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+
+# macOS
+macos/Pods/
+
+# Linux
+linux/flutter/ephemeral/
+
+# Windows
+windows/flutter/ephemeral/
+
+# Web
+web/flutter_service_worker.js
+web/version.json
+
+# =========================
+# Environment Files
+# =========================
+
+.env
+.env.*
+!.env.example
+
+# =========================
+# Logs
+# =========================
+
+*.log
+logs/
+
+# =========================
+# OS Files
+# =========================
+
+.DS_Storecls
+
+Thumbs.db
