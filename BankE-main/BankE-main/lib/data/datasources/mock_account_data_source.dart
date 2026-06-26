@@ -6,6 +6,7 @@ import '../models/transaction_model.dart';
 import '../models/admin_user_model.dart';
 import '../models/loan_model.dart';
 import '../models/card_model.dart';
+import '../models/admin_transaction_model.dart';
 import 'account_data_source.dart';
 
 
@@ -390,7 +391,40 @@ class MockAccountDataSourceImpl implements AccountDataSource {
   Future<void> registerFcmToken(String token) async {}
 
   @override
-  Future<Map<String, dynamic>> fetchDashboardStats() async => {};
+  Future<Map<String, dynamic>> fetchDashboardStats() async {
+    await Future.delayed(const Duration(seconds: 1));
+    return {
+      'TotalUsers': 150,
+      'TotalTransactions': 1024,
+      'TotalDeposits': 45000.0,
+      'TotalWithdrawals': 12000.0,
+      'TotalRevenue': 2250.0,
+      'TotalBalance': 500000.0,
+      'PendingLoans': 5,
+      'TotalTransactionsToday': 45
+    };
+  }
+
+  @override
+  Future<AdminTransactionListModel> fetchAdminTransactions({
+    int page = 1,
+    int pageSize = 10,
+    String? search,
+    String? type,
+    String? status,
+    DateTime? startDate,
+    DateTime? endDate,
+    String? sortBy,
+    bool sortDescending = true,
+  }) async {
+    await Future.delayed(const Duration(seconds: 1));
+    return AdminTransactionListModel(
+      transactions: [],
+      totalCount: 0,
+      totalPages: 0,
+      currentPage: 1,
+    );
+  }
 
   @override
   void reset() {

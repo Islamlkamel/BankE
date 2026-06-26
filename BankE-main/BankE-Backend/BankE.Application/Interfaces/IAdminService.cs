@@ -16,5 +16,16 @@ namespace BankE.Application.Interfaces
         Task<ApiResponse> ReviewLoanAsync(LoanReviewRequest request);
 
         Task<ApiResponse<object>> GetDashboardStatsAsync();
+        
+        Task<ApiResponse<AdminTransactionListResponse>> GetTransactionsAsync(
+            int page, 
+            int pageSize, 
+            string? search, 
+            string? type, 
+            string? status, 
+            DateTime? startDate, 
+            DateTime? endDate, 
+            string? sortBy, 
+            bool sortDescending);
     }
 }

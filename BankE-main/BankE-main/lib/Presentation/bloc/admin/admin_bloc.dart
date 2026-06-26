@@ -16,6 +16,7 @@ class AdminBloc extends Bloc<AdminEvent, AdminState> {
     on<UnblockUserEvent>(_onUnblockUser);
     on<AdjustBalanceEvent>(_onAdjustBalance);
     on<ReviewLoanEvent>(_onReviewLoan);
+    on<FetchAdminTransactionsEvent>(_onFetchAdminTransactions);
     on<LogoutAdminEvent>((event, emit) => emit(AdminInitial()));
   }
 
@@ -111,6 +112,27 @@ class AdminBloc extends Bloc<AdminEvent, AdminState> {
       await dataSource.reviewLoan(event.loanId, event.decision, event.note);
       emit(AdminActionSuccess('Loan ${event.decision} successfully'));
       add(const FetchAllUsersEvent());
+    } catch (e) {
+      emit(AdminError(e.toString()));
+    }
+  }
+
+  Future<void> _onFetchAdminTransactions(
+      FetchAdminTransactionsEvent event, Emitter<AdminState> emit) async {
+    emit(AdminLoading());
+    try {
+      final data = await dataSource.fetchAdminTransactions(
+        page: event.page,
+        pageSize: event.pageSize,
+        search: event.search,
+        type: event.type,
+        status: event.status,
+        startDate: event.startDate,
+        endDate: event.endDate,
+        sortBy: event.sortBy,
+        sortDescending: event.sortDescending,
+      );
+      emit(AdminTransactionsLoaded(data));
     } catch (e) {
       emit(AdminError(e.toString()));
     }

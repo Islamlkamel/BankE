@@ -81,5 +81,22 @@ namespace BankE.API.Controllers
             var result = await _adminService.GetDashboardStatsAsync();
             return Ok(result);
         }
+
+        [HttpGet("transactions")]
+        public async Task<IActionResult> GetTransactions(
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 10,
+            [FromQuery] string? search = null,
+            [FromQuery] string? type = null,
+            [FromQuery] string? status = null,
+            [FromQuery] DateTime? startDate = null,
+            [FromQuery] DateTime? endDate = null,
+            [FromQuery] string? sortBy = "date",
+            [FromQuery] bool sortDescending = true)
+        {
+            var result = await _adminService.GetTransactionsAsync(
+                page, pageSize, search, type, status, startDate, endDate, sortBy, sortDescending);
+            return Ok(result);
+        }
     }
 }

@@ -60,3 +60,40 @@ class ReviewLoanEvent extends AdminEvent {
 }
 
 class LogoutAdminEvent extends AdminEvent {}
+
+class FetchAdminTransactionsEvent extends AdminEvent {
+  final int page;
+  final int pageSize;
+  final String? search;
+  final String? type;
+  final String? status;
+  final DateTime? startDate;
+  final DateTime? endDate;
+  final String? sortBy;
+  final bool sortDescending;
+
+  const FetchAdminTransactionsEvent({
+    this.page = 1,
+    this.pageSize = 10,
+    this.search,
+    this.type,
+    this.status,
+    this.startDate,
+    this.endDate,
+    this.sortBy,
+    this.sortDescending = true,
+  });
+
+  @override
+  List<Object?> get props => [
+        page,
+        pageSize,
+        search,
+        type,
+        status,
+        startDate,
+        endDate,
+        sortBy,
+        sortDescending,
+      ];
+}

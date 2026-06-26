@@ -85,6 +85,7 @@ builder.Services.AddScoped<ILoansService, LoansService>();
 builder.Services.AddScoped<IAdminUserService, AdminUserService>();
 builder.Services.AddScoped<IAdminLoanService, AdminLoanService>();
 builder.Services.AddScoped<IAdminDashboardService, AdminDashboardService>();
+builder.Services.AddScoped<IAdminTransactionService, AdminTransactionService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddScoped<IBeneficiaryService, BeneficiaryService>();

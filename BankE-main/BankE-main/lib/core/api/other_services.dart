@@ -282,4 +282,28 @@ class AdminService {
 
   Future<Response> getDashboardStats() =>
       _apiClient.dio.get('/Admin/dashboard-stats');
+
+  Future<Response> getTransactions({
+    int page = 1,
+    int pageSize = 10,
+    String? search,
+    String? type,
+    String? status,
+    DateTime? startDate,
+    DateTime? endDate,
+    String? sortBy,
+    bool sortDescending = true,
+  }) {
+    return _apiClient.dio.get('/Admin/transactions', queryParameters: {
+      'page': page,
+      'pageSize': pageSize,
+      if (search != null && search.isNotEmpty) 'search': search,
+      if (type != null && type.isNotEmpty) 'type': type,
+      if (status != null && status.isNotEmpty) 'status': status,
+      if (startDate != null) 'startDate': startDate.toIso8601String(),
+      if (endDate != null) 'endDate': endDate.toIso8601String(),
+      if (sortBy != null && sortBy.isNotEmpty) 'sortBy': sortBy,
+      'sortDescending': sortDescending,
+    });
+  }
 }

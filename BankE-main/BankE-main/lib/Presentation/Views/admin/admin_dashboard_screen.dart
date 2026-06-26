@@ -13,6 +13,7 @@ import '../../../../data/models/loan_model.dart';
 import '../../../../core/api/api_client.dart';
 import '../loans/pdf_viewer_screen.dart';
 import 'admin_loans_screen.dart';
+import 'admin_transactions_screen.dart';
 
 class AdminDashboardScreen extends StatefulWidget {
   const AdminDashboardScreen({super.key});
@@ -191,19 +192,39 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       // Top Stats Row
-                      Row(
+                      GridView.count(
+                        crossAxisCount: 2,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        crossAxisSpacing: 16,
+                        mainAxisSpacing: 16,
+                        childAspectRatio: 1.5,
                         children: [
-                          Expanded(
-                              child: _buildStatCard('Total Users',
-                                  totalUsers.toString(), Icons.people)),
-                          const SizedBox(width: 16),
-                          Expanded(
-                              child: _buildStatCard(
-                                  'Total Balance',
-                                  formatter.format(
-                                      totalBalance is num ? totalBalance : 0.0),
-                                  Icons.account_balance)),
+                          _buildStatCard('Total Users', totalUsers.toString(), Icons.people),
+                          _buildStatCard('Total Balance', formatter.format(totalBalance is num ? totalBalance : 0.0), Icons.account_balance),
+                          _buildStatCard('Transactions', (state.stats['TotalTransactions'] ?? 0).toString(), Icons.swap_horiz),
+                          _buildStatCard('Deposits', formatter.format(state.stats['TotalDeposits'] ?? 0.0), Icons.arrow_downward, color: Colors.green),
+                          _buildStatCard('Withdrawals', formatter.format(state.stats['TotalWithdrawals'] ?? 0.0), Icons.arrow_upward, color: Colors.red),
+                          _buildStatCard('Revenue', formatter.format(state.stats['TotalRevenue'] ?? 0.0), Icons.attach_money, color: Colors.tealAccent),
                         ],
+                      ),
+                      const SizedBox(height: 24),
+                      
+                      ElevatedButton.icon(
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AdminTransactionsScreen(),
+                          ),
+                        ),
+                        icon: const Icon(Icons.receipt_long),
+                        label: const Text('Manage Transactions'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.tealAccent,
+                          foregroundColor: Colors.black,
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
                       ),
                       const SizedBox(height: 24),
 
@@ -361,26 +382,28 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
     );
   }
 
-  Widget _buildStatCard(String title, String value, IconData icon) {
+  Widget _buildStatCard(String title, String value, IconData icon, {Color color = Colors.tealAccent}) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: const Color(0xFF1E293B),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.tealAccent.withOpacity(0.2)),
+        border: Border.all(color: color.withOpacity(0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, color: Colors.tealAccent, size: 24),
-          const SizedBox(height: 12),
-          Text(title, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+          Icon(icon, color: color, size: 24),
+          const SizedBox(height: 8),
+          Text(title, style: const TextStyle(color: Colors.grey, fontSize: 12), maxLines: 1, overflow: TextOverflow.ellipsis),
           const SizedBox(height: 4),
           Text(value,
               style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold)),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
+              maxLines: 1, overflow: TextOverflow.ellipsis),
         ],
       ),
     );

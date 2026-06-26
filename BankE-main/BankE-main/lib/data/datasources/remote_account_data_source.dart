@@ -8,6 +8,7 @@ import 'package:contr_project/data/models/loan_model.dart';
 import '../models/card_model.dart';
 import '../models/account_model.dart';
 import '../models/transaction_model.dart';
+import '../models/admin_transaction_model.dart';
 import 'account_data_source.dart';
 
 class RemoteAccountDataSourceImpl implements AccountDataSource {
@@ -209,6 +210,33 @@ class RemoteAccountDataSourceImpl implements AccountDataSource {
     final response = await adminService.getDashboardStats();
     apiClient.ensureSuccess(response);
     return Map<String, dynamic>.from(response.data);
+  }
+
+  @override
+  Future<AdminTransactionListModel> fetchAdminTransactions({
+    int page = 1,
+    int pageSize = 10,
+    String? search,
+    String? type,
+    String? status,
+    DateTime? startDate,
+    DateTime? endDate,
+    String? sortBy,
+    bool sortDescending = true,
+  }) async {
+    final response = await adminService.getTransactions(
+      page: page,
+      pageSize: pageSize,
+      search: search,
+      type: type,
+      status: status,
+      startDate: startDate,
+      endDate: endDate,
+      sortBy: sortBy,
+      sortDescending: sortDescending,
+    );
+    apiClient.ensureSuccess(response);
+    return AdminTransactionListModel.fromJson(response.data);
   }
 
   // ── Beneficiaries ─────────────────────────────────────────────

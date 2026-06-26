@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import '../models/account_model.dart';
 import '../models/transaction_model.dart';
 import '../models/admin_user_model.dart';
+import '../models/admin_transaction_model.dart';
 import '../models/loan_model.dart';
 import '../models/card_model.dart';
 
@@ -21,6 +22,17 @@ abstract class AccountDataSource {
   Future<void> unblockUser(String userId);
   Future<void> adjustBalance(String userId, double amount, String reason);
   Future<Map<String, dynamic>> fetchDashboardStats();
+  Future<AdminTransactionListModel> fetchAdminTransactions({
+    int page = 1,
+    int pageSize = 10,
+    String? search,
+    String? type,
+    String? status,
+    DateTime? startDate,
+    DateTime? endDate,
+    String? sortBy,
+    bool sortDescending = true,
+  });
 
   // Loan methods
   Future<void> submitLoanRequest(double amount, String purpose, int termMonths, {Uint8List? fileBytes, String? fileName});

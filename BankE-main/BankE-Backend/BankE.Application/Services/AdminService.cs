@@ -9,15 +9,18 @@ namespace BankE.Application.Services
         private readonly IAdminUserService _adminUserService;
         private readonly IAdminLoanService _adminLoanService;
         private readonly IAdminDashboardService _adminDashboardService;
+        private readonly IAdminTransactionService _adminTransactionService;
 
         public AdminService(
             IAdminUserService adminUserService,
             IAdminLoanService adminLoanService,
-            IAdminDashboardService adminDashboardService)
+            IAdminDashboardService adminDashboardService,
+            IAdminTransactionService adminTransactionService)
         {
             _adminUserService = adminUserService;
             _adminLoanService = adminLoanService;
             _adminDashboardService = adminDashboardService;
+            _adminTransactionService = adminTransactionService;
         }
 
         public Task<ApiResponse<IEnumerable<AdminUserResponse>>> GetUsersAsync(string? search, bool? isActive) =>
@@ -46,5 +49,17 @@ namespace BankE.Application.Services
 
         public Task<ApiResponse<object>> GetDashboardStatsAsync() =>
             _adminDashboardService.GetDashboardStatsAsync();
+
+        public Task<ApiResponse<AdminTransactionListResponse>> GetTransactionsAsync(
+            int page, 
+            int pageSize, 
+            string? search, 
+            string? type, 
+            string? status, 
+            DateTime? startDate, 
+            DateTime? endDate, 
+            string? sortBy, 
+            bool sortDescending) =>
+            _adminTransactionService.GetTransactionsAsync(page, pageSize, search, type, status, startDate, endDate, sortBy, sortDescending);
     }
 }

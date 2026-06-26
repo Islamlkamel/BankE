@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import '../../../../data/models/admin_user_model.dart';
 import '../../../../data/models/loan_model.dart';
+import '../../../../data/models/admin_transaction_model.dart';
 
 abstract class AdminState extends Equatable {
   const AdminState();
@@ -43,4 +44,11 @@ class AdminError extends AdminState {
   const AdminError(this.message);
   @override
   List<Object?> get props => [message];
+}
+
+class AdminTransactionsLoaded extends AdminState {
+  final AdminTransactionListModel data;
+  const AdminTransactionsLoaded(this.data);
+  @override
+  List<Object?> get props => [data];
 }
